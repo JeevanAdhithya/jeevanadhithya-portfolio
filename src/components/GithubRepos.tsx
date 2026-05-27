@@ -65,7 +65,7 @@ const GithubRepos = () => {
   };
 
   return (
-    <section id="github" className="py-16 md:py-24 bg-white dark:bg-slate-900 transition-colors duration-500 overflow-hidden font-['Poppins']">
+    <section id="github" className="py-16 md:py-24 bg-white dark:bg-transparent transition-colors duration-500 overflow-hidden font-['Poppins']">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-16 gap-6 text-center md:text-left">
           <motion.div
@@ -147,6 +147,21 @@ const GithubRepos = () => {
 
                     <div className="mt-auto space-y-6">
                       <div className="flex flex-wrap items-center gap-3">
+                        {(() => {
+                          const isMobile = ['dart', 'flutter', 'kotlin', 'swift'].includes((repo.language || '').toLowerCase()) || 
+                                           (repo.name + ' ' + repo.description).toLowerCase().includes('mobile') ||
+                                           (repo.name + ' ' + repo.description).toLowerCase().includes('flutter');
+                          const platform = isMobile ? "Mobile" : "Web";
+                          const PlatformIcon = isMobile ? Smartphone : Globe;
+                          return (
+                            <div className="flex items-center space-x-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-full border border-slate-200 dark:border-slate-700/50">
+                              <PlatformIcon className="w-3 h-3 text-slate-600 dark:text-slate-400" />
+                              <span className="text-[9px] font-black uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                                {platform}
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {repo.language && (
                           <div className="flex items-center space-x-1.5 px-3 py-1 bg-blue-50 dark:bg-blue-900/30 rounded-full border border-blue-100/50 dark:border-blue-800/50">
                             <Zap className="w-3 h-3 text-blue-600 dark:text-blue-400" />

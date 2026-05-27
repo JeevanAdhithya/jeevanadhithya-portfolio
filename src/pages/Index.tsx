@@ -1,5 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -18,55 +20,40 @@ gsap.registerPlugin(ScrollTrigger);
 const Index = () => {
   const { theme } = useTheme();
   const mainRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    // Scrollreveal animations for all sections
-    const sections = document.querySelectorAll('section');
-    
-    sections.forEach((section, index) => {
-      // Don't animate the first section (Hero) here as it has its own entry animation
-      if (index === 0) return;
-
-      gsap.from(section, {
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          toggleActions: "play none none none"
-        },
-        opacity: 0,
-        y: 60,
-        duration: 1.5,
-        ease: "power4.out",
-        clearProps: "all"
-      });
-    });
-
-    // Handle scroll-based section visibility (Intersection Observer fallback for classes if needed)
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1,
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > window.innerHeight / 2);
     };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
     };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    sections.forEach((section) => observer.observe(section));
-
+  useEffect(() => {
     return () => {
-      observer.disconnect();
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 
   return (
-    <div ref={mainRef} className={`min-h-screen transition-all duration-1000 ${theme === 'dark' ? 'dark-bg' : 'light-bg'} selection:bg-blue-500/30`}>
+    <div ref={mainRef} className={`min-h-screen transition-all duration-1000 ${theme === 'dark' ? 'dark-bg' : 'light-bg'} selection:bg-blue-500/30 overflow-hidden relative`}>
+      {/* Premium Cursor Follower Spotlight Background Glow */}
+      <div 
+        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-60 dark:opacity-40"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.05), transparent 80%)`
+        }}
+      />
       <Header />
       <Hero />
       <About />
@@ -75,6 +62,21 @@ const Index = () => {
       <Projects />
       <Contact />
       <Footer />
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.8 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-6 left-6 z-50 w-12 h-12 bg-white/90 dark:bg-slate-800/90 text-slate-900 dark:text-white rounded-2xl shadow-xl flex items-center justify-center border border-slate-200 dark:border-slate-700 backdrop-blur-md hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group"
+          >
+            <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+          </motion.button>
+        )}
+      </AnimatePresence>
       <Chatbot />
     </div>
   );

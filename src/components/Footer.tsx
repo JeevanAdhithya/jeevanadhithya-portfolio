@@ -26,7 +26,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white dark:bg-slate-950 pt-20 pb-10 relative overflow-hidden font-['Poppins'] transition-colors duration-500">
+    <footer className="bg-white dark:bg-transparent pt-20 pb-10 relative overflow-hidden font-['Poppins'] transition-colors duration-500">
       {/* Decorative gradient line */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent" />
       
@@ -37,14 +37,14 @@ const Footer = () => {
           <div className="lg:col-span-5 space-y-6">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg transform rotate-6 hover:rotate-0 transition-transform duration-300">
-                <span className="text-white font-black text-xl">J</span>
+                <span className="text-white font-black text-sm">JA</span>
               </div>
               <span className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Jeevan <span className="text-blue-600">Adhithya</span>
               </span>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-md">
-              A dedicated <span className="text-slate-900 dark:text-white font-bold">Full-Stack Developer</span> and 
+              A dedicated <span className="text-slate-900 dark:text-white font-bold">MERN Stack Developer</span> and 
               <span className="text-blue-600 font-bold"> AI Enthusiast</span> from Coimbatore. I build 
               modern web solutions that bring ideas to life.
             </p>
@@ -104,7 +104,7 @@ const Footer = () => {
             
             <div className="pt-4">
               <div className="p-[1px] rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-                <div className="bg-white dark:bg-slate-950 rounded-[15px] p-4 flex items-center justify-between shadow-inner">
+                <div className="bg-white dark:bg-slate-950/50 rounded-[15px] p-4 flex items-center justify-between shadow-inner">
                   <div className="text-xs">
                     <p className="text-blue-600 dark:text-blue-400 font-bold uppercase tracking-widest">Status</p>
                     <p className="text-slate-900 dark:text-white font-bold">Open for Collaboration</p>

@@ -14,8 +14,8 @@ import ReactMarkdown from 'react-markdown';
 const JEEVAN_PORTFOLIO_CONTEXT = `
 You are the AI Assistant for Jeevan Adhithya's personal portfolio. 
 Jeevan is a Full-Stack Developer and AI Expert based in Coimbatore, Tamil Nadu.
-Current Role: Lead Full Stack Developer.
-Skills: React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Gemini/OpenAI Integration.
+Current Role: Lead MERN Stack Developer.
+Skills: React, Next.js, Node.js, MongoDB, Express.js, Python, TypeScript, Tailwind CSS, Gemini/OpenAI Integration.
 Projects: Portfolios, AI-driven applications, CRM systems, and more.
 Hobbies: Coding, learning about AI advancements, playing chess.
 Response Tone: Professional, friendly, and helpful. Always highlight Jeevan's technical expertise. Keep responses concise but impactful.
@@ -27,19 +27,37 @@ interface Message {
   text: string;
 }
 
+const PRESET_QUESTIONS = [
+  { text: "What are your core technical skills?", label: "🛠️ Technical Stack" },
+  { text: "Are you open to full-stack roles?", label: "💼 Open for Roles?" }
+];
+
 const Chatbot = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', text: "Hi! I'm Jeevan's AI Assistant. How can I help you today?" }
-  ]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const saved = localStorage.getItem('jeevan_portfolio_chat_history');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse saved chat history:", e);
+      }
+    }
+    return [
+      { role: 'assistant', text: "Hi! I'm Jeevan's AI Assistant. How can I help you today?" }
+    ];
+  });
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   
-  // Initialize Gemini
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-  const genAI = useRef(apiKey ? new GoogleGenerativeAI(apiKey) : null);
+  // Initialize OpenRouter
+  const openRouterKey = import.meta.env.VITE_OPENROUTER_API_KEY || "";
+
+  useEffect(() => {
+    localStorage.setItem('jeevan_portfolio_chat_history', JSON.stringify(messages));
+  }, [messages]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -51,24 +69,27 @@ const Chatbot = () => {
   }, [messages, isTyping]);
 
   const clearChat = () => {
+    localStorage.removeItem('jeevan_portfolio_chat_history');
     setMessages([{ role: 'assistant', text: "Chat history cleared. How else can I help you?" }]);
     toast.success("Chat history cleared");
   };
 
-  const handleSend = async () => {
-    if (!input.trim() || isTyping) return;
+
+  const handleSend = async (textOverride?: string) => {
+    const userText = textOverride ? textOverride.trim() : input.trim();
+    if (!userText || isTyping) return;
     
-    const userText = input.trim();
     const userMessage: Message = { role: 'user', text: userText };
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
+    if (!textOverride) setInput('');
     setIsTyping(true);
 
-    if (!genAI.current) {
+    if (!openRouterKey) {
       setTimeout(() => {
         setMessages(prev => [...prev, { 
           role: 'assistant', 
-          text: "I'm currently in 'offline mode' (API key not configured). Please add your Gemini API key to VITE_GEMINI_API_KEY!" 
+          text: "I'm currently in 'offline mode' (API key not configured). Please add your OpenRouter API key to VITE_OPENROUTER_API_KEY!" 
         }]);
         setIsTyping(false);
       }, 1000);
@@ -76,47 +97,61 @@ const Chatbot = () => {
     }
 
     try {
-      // Logic for fallback model as implemented before
-      let model;
-      try {
-        model = genAI.current.getGenerativeModel({ model: "gemini-2.5-flash" });
-      } catch (e) {
-        model = genAI.current.getGenerativeModel({ model: "gemini-2.5-lite" });
-      }
-      
-      const history = messages
-        .filter(msg => msg.text !== messages[0].text)
-        .map(msg => ({
-          role: msg.role === 'assistant' ? 'model' : 'user',
-          parts: [{ text: msg.text }],
-        }));
+      const chatMessages = [
+        { role: "system", content: JEEVAN_PORTFOLIO_CONTEXT },
+        ...updatedMessages.map(msg => ({
+          role: msg.role === 'assistant' ? 'assistant' : 'user',
+          content: msg.text
+        }))
+      ];
 
-      const chat = model.startChat({ history });
-      const prompt = `${JEEVAN_PORTFOLIO_CONTEXT}\n\nUser Question: ${userText}`;
-      const result = await chat.sendMessage(prompt);
-      const response = await result.response;
-      const text = response.text();
+      const fallbackModels = [
+        "openrouter/auto"
+      ];
 
-      setMessages(prev => [...prev, { role: 'assistant', text }]);
-    } catch (error: any) {
-      console.error("Gemini Error:", error);
-      
-      if (error?.message?.includes('404') || error?.message?.includes('not found')) {
+      let data = null;
+      let success = false;
+
+      for (const model of fallbackModels) {
         try {
-          const fallbackModel = genAI.current.getGenerativeModel({ model: "gemini-pro" });
-          const result = await fallbackModel.generateContent(`${JEEVAN_PORTFOLIO_CONTEXT}\n\nUser Question: ${userText}`);
-          const response = await result.response;
-          const text = response.text();
-          setMessages(prev => [...prev, { role: 'assistant', text }]);
-          setIsTyping(false);
-          return;
-        } catch (fallbackError) {
-          console.error("Fallback Error:", fallbackError);
+          const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${openRouterKey}`,
+              "Content-Type": "application/json",
+              "HTTP-Referer": "https://Jeeva9942.github.io/jeevanadhithya-portfolio/",
+              "X-Title": "Jeevan Adhithya Portfolio"
+            },
+            body: JSON.stringify({
+              model: model,
+              messages: chatMessages,
+              temperature: 0.7
+            })
+          });
+
+          if (res.ok) {
+            data = await res.json();
+            success = true;
+            break;
+          } else {
+            console.warn(`Model ${model} failed with status ${res.status}`);
+          }
+        } catch (err) {
+          console.warn(`Error connecting to model ${model}:`, err);
         }
       }
 
+      if (!success || !data) {
+        throw new Error("All fallback models failed on OpenRouter.");
+      }
+
+      const text = data.choices?.[0]?.message?.content || "Sorry, I am having trouble forming a response right now.";
+
+      setMessages(prev => [...prev, { role: 'assistant', text }]);
+    } catch (error: any) {
+      console.error("OpenRouter Error:", error);
       toast.error("AI service error. Please try again.");
-      setMessages(prev => [...prev, { role: 'assistant', text: "Sorry, I'm having trouble connecting. My neural circuits might be overloaded. Please try again later!" }]);
+      setMessages(prev => [...prev, { role: 'assistant', text: "Sorry, I'm having trouble connecting to OpenRouter. Please try again later!" }]);
     } finally {
       setIsTyping(false);
     }
@@ -206,6 +241,26 @@ const Chatbot = () => {
                       )}
                     </motion.div>
                   ))}
+                  {messages.length === 1 && !isTyping && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="grid grid-cols-1 gap-2 mt-4 pl-11"
+                    >
+                      <p className="text-[9px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">Suggested Questions:</p>
+                      {PRESET_QUESTIONS.map((q, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => handleSend(q.text)}
+                          className="text-left text-xs font-semibold p-3 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 hover:bg-blue-50/50 dark:bg-slate-900/30 dark:hover:bg-blue-950/20 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-100 dark:hover:border-blue-900/50 transition-all duration-300 shadow-sm hover:shadow active:scale-98 flex items-center justify-between group"
+                        >
+                          <span>{q.label}</span>
+                          <Sparkles className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-blue-500 dark:text-blue-400 transition-opacity" />
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
                   {isTyping && (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex justify-start gap-3">
                       <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0 shadow-lg text-white">
@@ -233,7 +288,7 @@ const Chatbot = () => {
                     className="flex-1 border-none bg-transparent h-11 px-3 focus-visible:ring-0 text-[13px] font-semibold text-slate-800 dark:text-slate-100 placeholder:text-slate-400"
                   />
                   <Button 
-                    onClick={handleSend}
+                    onClick={() => handleSend()}
                     disabled={!input.trim() || isTyping}
                     size="icon"
                     className="w-11 h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/30 active:scale-95 transition-all"

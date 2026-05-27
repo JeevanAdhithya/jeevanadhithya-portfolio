@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Menu, X, Github, Linkedin, Mail, Sun, Moon, ArrowRight, Zap } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail, Sun, Moon, ArrowRight, Zap, Home, User, Code2, Briefcase, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -14,6 +15,11 @@ const Header = () => {
     setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -21,11 +27,11 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#home', label: 'Home', icon: Home },
+    { href: '#about', label: 'About', icon: User },
+    { href: '#skills', label: 'Skills', icon: Code2 },
+    { href: '#projects', label: 'Projects', icon: Briefcase },
+    { href: '#contact', label: 'Contact', icon: Send },
   ];
 
   const scrollToSection = (href: string) => {
@@ -64,7 +70,7 @@ const Header = () => {
             onClick={() => scrollToSection('#home')}
           >
             <div className="relative w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg transition-all group-hover:rotate-12">
-              <span className="text-white font-black text-xl">J</span>
+              <span className="text-white font-black text-sm">JA</span>
               <motion.div 
                 className="absolute -inset-1 bg-blue-500 rounded-xl -z-10 opacity-30 blur-sm"
                 animate={{ scale: [1, 1.2, 1] }}
@@ -85,13 +91,14 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
                   theme === 'dark' 
                     ? 'text-slate-400 hover:text-white hover:bg-white/5' 
                     : 'text-slate-600 hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
-                {item.label}
+                <item.icon className="w-3.5 h-3.5" />
+                <span>{item.label}</span>
               </motion.button>
             ))}
           </nav>
@@ -178,13 +185,16 @@ const Header = () => {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className={`flex items-center justify-between p-4 rounded-3xl transition-all ${
+                    className={`flex items-center space-x-4 p-4 rounded-3xl transition-all group ${
                       theme === 'dark' 
                         ? 'hover:bg-white/10 text-white' 
                         : 'hover:bg-blue-50 text-slate-900'
                     }`}
                   >
-                    <span className="text-sm font-black uppercase tracking-widest">{item.label}</span>
+                    <div className={`p-2 rounded-xl transition-colors ${theme === 'dark' ? 'bg-white/5 group-hover:bg-white/20' : 'bg-slate-100 group-hover:bg-blue-100 group-hover:text-blue-600'}`}>
+                      <item.icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-sm font-black uppercase tracking-widest flex-1 text-left">{item.label}</span>
                     <div className={`p-2 rounded-xl ${theme === 'dark' ? 'bg-white/10' : 'bg-blue-600 text-white'}`}>
                       <ArrowRight className="w-4 h-4" />
                     </div>
@@ -207,6 +217,8 @@ const Header = () => {
           </>
         )}
       </AnimatePresence>
+
+
     </header>
   );
 };

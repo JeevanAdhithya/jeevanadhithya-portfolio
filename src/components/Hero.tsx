@@ -97,14 +97,14 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, type: "spring" }}
-              className="inline-flex items-center space-x-2 px-6 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 backdrop-blur-md relative"
+              className="inline-flex items-center space-x-2 px-6 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 backdrop-blur-md relative overflow-hidden"
             >
               <Zap className="w-3 h-3 text-blue-500 fill-blue-500" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500">
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500">
                 Crafting Elite AI Solutions
               </span>
               <motion.div 
-                className="absolute inset-x-0 bottom-0 h-px bg-blue-500/30"
+                className="absolute left-0 bottom-0 h-px bg-blue-500/30"
                 initial={{ width: 0 }}
                 animate={{ width: '100%' }}
                 transition={{ duration: 1.5, delay: 0.5 }}
@@ -140,7 +140,7 @@ const Hero = () => {
               transition={{ duration: 1, delay: 0.3 }}
               className={`text-lg sm:text-lg max-w-lg leading-relaxed font-semibold ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}
             >
-              Transforming complex visions into <span className={theme === 'dark' ? 'text-white' : 'text-blue-600 font-bold'}>state-of-the-art</span> digital ecosystems. I bridge the gap between <span className="text-blue-500 font-black">advanced AI</span> and seamless human experience.
+              Transforming complex visions into <span className={theme === 'dark' ? 'text-white' : 'text-blue-600 font-bold'}>state-of-the-art</span> digital ecosystems. A <span className="text-blue-500 font-black">MERN Stack Developer</span> bridging the gap between advanced AI and seamless human experience.
             </motion.p>
 
             {/* Micro Stats */}
@@ -244,15 +244,12 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
-                className={`absolute -top-6 -right-6 px-6 py-4 rounded-3xl shadow-2xl flex items-center gap-4 border min-w-[220px] bg-white border-slate-100 hover:scale-105 transition-transform cursor-pointer`}
+                className={`absolute -top-6 -right-6 px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border bg-white border-slate-100 hover:scale-105 transition-transform cursor-pointer`}
               >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center text-white font-black text-xl shadow-lg border-2 border-white">
-                  J
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center text-white font-black text-base shadow-lg border-2 border-white">
+                  JA
                 </div>
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.1em] text-slate-400">Project Architect</p>
-                  <p className="text-sm font-black text-slate-900">Jeevan Adhithya</p>
-                </div>
+                <p className="text-sm font-black text-slate-900">Jeevan Adhithya</p>
               </motion.div>
 
               <div className="absolute -inset-10 bg-blue-600/5 blur-[80px] -z-10 rounded-full animate-pulse" />

@@ -90,7 +90,7 @@ const Projects = () => {
     : projects.filter(p => p.category === filter);
 
   return (
-    <section id="projects" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden font-['Poppins'] transition-colors duration-500">
+    <section id="projects" className="py-24 bg-white dark:bg-transparent relative overflow-hidden font-['Poppins'] transition-colors duration-500">
       {/* Decorative Blur */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-100/30 dark:bg-blue-900/10 rounded-full blur-[120px] -z-10" />
 
@@ -106,8 +106,9 @@ const Projects = () => {
               <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <span className="text-[10px] font-black text-blue-700 dark:text-blue-300 tracking-widest uppercase">Portfolio Showcase</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
-              Transforming <span className="text-blue-600 dark:text-blue-500">Vision</span> Into Code.
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight flex justify-center items-center">
+              <Layers className="w-10 h-10 md:w-12 md:h-12 mr-3 md:mr-4 text-amber-500 dark:text-amber-400 flex-shrink-0" />
+              <span>Transforming <span className="text-blue-600 dark:text-blue-500">Vision</span> Into Code.</span>
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium">
               Explore my latest engineering feats across <span className="text-slate-900 dark:text-white font-bold underline decoration-blue-500 decoration-4 underline-offset-4">Web Architecture</span> and <span className="text-slate-900 dark:text-white font-bold underline decoration-purple-500 decoration-4 underline-offset-4">Mobile Systems</span>.
@@ -155,7 +156,10 @@ const Projects = () => {
                 whileHover={{ y: -10 }}
                 className="h-full"
               >
-                <Card className="group relative h-full overflow-hidden border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col ring-1 ring-slate-100 dark:ring-slate-800 cursor-default">
+                <Card className="group relative h-full overflow-hidden border border-slate-100 dark:border-slate-800/50 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm hover:shadow-3xl hover:border-blue-500/20 dark:hover:border-blue-400/20 transition-all duration-500 flex flex-col ring-1 ring-slate-100 dark:ring-slate-800 cursor-default">
+                  {/* Premium Glowing Card Background */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/0 via-indigo-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:via-indigo-500/5 group-hover:to-purple-500/5 transition-all duration-700 pointer-events-none rounded-[2.5rem]" />
+                  
                   {/* Image with Parallax-like effect */}
                   <div className="relative aspect-[16/10] overflow-hidden m-4 rounded-[1.8rem] bg-slate-100 dark:bg-slate-800">
                     <motion.img

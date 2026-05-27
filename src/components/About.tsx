@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion';
-import { Code, Coffee, Heart, Zap, Award, BookOpen, Smile, Star, Target, Compass, Sparkles, Cpu } from 'lucide-react';
+import { Code, Coffee, Heart, Zap, Award, BookOpen, Smile, Star, Target, Compass, Sparkles, Cpu, User } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 const About = () => {
@@ -30,7 +30,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-20 md:py-24 bg-slate-50 dark:bg-slate-950 relative overflow-hidden font-['Poppins'] transition-colors duration-500">
+    <section id="about" className="py-20 md:py-24 bg-slate-50 dark:bg-transparent relative overflow-hidden font-['Poppins'] transition-colors duration-500">
       {/* Decorative background gradients */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-100/20 dark:bg-purple-900/10 rounded-full blur-[100px] -z-10 -translate-x-1/2 translate-y-1/2" />
@@ -45,7 +45,7 @@ const About = () => {
         >
           {/* Left Column: Visuals */}
           <motion.div variants={itemVariants} className="relative group flex justify-center lg:justify-start">
-            <div className="relative w-full max-w-[480px] aspect-square rounded-[3rem] bg-white dark:bg-slate-900 p-6 md:p-8 shadow-2xl border border-slate-100 dark:border-slate-800 transition-all duration-700 hover:rotate-1">
+            <div className="relative w-full aspect-square rounded-[3rem] bg-white dark:bg-slate-900 p-6 md:p-8 shadow-2xl border border-slate-100 dark:border-slate-800 transition-all duration-700 hover:rotate-1">
               <div className="w-full h-full bg-slate-950 rounded-[2rem] relative overflow-hidden shadow-2xl ring-4 ring-slate-100 dark:ring-slate-800">
                 <div className="absolute top-0 left-0 w-full p-6 font-mono text-[10px] md:text-xs text-white/40">
                   <div className="flex space-x-2 mb-6">
@@ -92,17 +92,19 @@ const About = () => {
           {/* Right Column: Content */}
           <motion.div variants={itemVariants} className="space-y-6 md:space-y-10">
             <div className="space-y-4">
-              <span className="text-blue-600 dark:text-blue-400 font-black tracking-widest uppercase text-[9px] px-3 py-1 bg-blue-50 dark:bg-blue-900/40 rounded-full inline-block">
+              <span className="text-blue-600 dark:text-blue-400 font-black tracking-widest uppercase text-[9px] px-3 py-1 bg-blue-50 dark:bg-blue-900/40 rounded-full inline-flex items-center">
+                <User className="w-3.5 h-3.5 mr-1" />
                 Personal Profile
               </span>
-              <h2 className="text-3xl md:text-5xl font-black text-slate-950 dark:text-white leading-[1.2]">
-                Crafting <span className="text-blue-500 underline decoration-blue-100 dark:decoration-blue-900/50 decoration-4 underline-offset-4">Digital</span> Mastery.
+              <h2 className="text-3xl md:text-5xl font-black text-slate-950 dark:text-white leading-[1.2] flex items-center">
+                <Compass className="w-10 h-10 md:w-12 md:h-12 mr-3 md:mr-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                <span>Crafting <span className="text-blue-500 underline decoration-blue-100 dark:decoration-blue-900/50 decoration-4 underline-offset-4">Digital</span> Mastery.</span>
               </h2>
             </div>
 
             <div className="space-y-6 text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed font-medium">
               <p>
-                I'm <span className="text-slate-950 dark:text-white font-black underline decoration-blue-500/20 decoration-2 underline-offset-4">Jeevan Adhithya</span>, a developer dedicated to exploring the boundaries of technology in Coimbatore.
+                I'm <span className="text-slate-950 dark:text-white font-black underline decoration-blue-500/20 decoration-2 underline-offset-4">Jeevan Adhithya</span>, a MERN Stack developer dedicated to exploring the boundaries of technology in Coimbatore.
               </p>
               <p>
                 I specialize in building complex, high-performance web systems where <span className="text-slate-950 dark:text-white font-black">Design meets Data</span>. I focus on creating experiences that aren't just usable—they're <span className="text-blue-600 dark:text-blue-400 font-black italic">impactful</span>.

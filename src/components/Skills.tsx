@@ -63,7 +63,7 @@ const skillCategories = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden font-['Poppins'] transition-colors duration-500">
+    <section id="skills" className="py-24 bg-white dark:bg-transparent relative overflow-hidden font-['Poppins'] transition-colors duration-500">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.03] dark:opacity-[0.05]">
         <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-blue-600 rounded-full blur-[140px]" />
@@ -82,8 +82,9 @@ const Skills = () => {
               <Zap className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <span className="text-[10px] font-black text-blue-700 dark:text-blue-300 tracking-widest uppercase">Technical Stack</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">
-              Expertise & <span className="text-blue-600 dark:text-blue-500">Mastery.</span>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 flex justify-center items-center">
+              <Code2 className="w-10 h-10 md:w-12 md:h-12 mr-3 md:mr-4 text-purple-600 dark:text-purple-500 flex-shrink-0" />
+              <span>Expertise & <span className="text-blue-600 dark:text-blue-500">Mastery.</span></span>
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
               I leverage a diverse set of modern tools and frameworks to build <span className="text-slate-900 dark:text-white font-bold">scalable</span>, <span className="text-slate-900 dark:text-white font-bold">performant</span> applications.
