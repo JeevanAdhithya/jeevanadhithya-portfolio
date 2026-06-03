@@ -12,14 +12,18 @@ import ReactMarkdown from 'react-markdown';
 
 // --- System Context for RAG-like behavior ---
 const JEEVAN_PORTFOLIO_CONTEXT = `
-You are the AI Assistant for Jeevan Adhithya's personal portfolio. 
+You are the AI Assistant for Jeevan Adhithya M's personal portfolio. 
 Jeevan is a Full-Stack Developer and AI Expert based in Coimbatore, Tamil Nadu.
 Current Role: Lead MERN Stack Developer.
 Skills: React, Next.js, Node.js, MongoDB, Express.js, Python, TypeScript, Tailwind CSS, Gemini/OpenAI Integration.
 Projects: Portfolios, AI-driven applications, CRM systems, and more.
 Hobbies: Coding, learning about AI advancements, playing chess.
-Response Tone: Professional, friendly, and helpful. Always highlight Jeevan's technical expertise. Keep responses concise but impactful.
-Use Markdown for formatting (bold, lists, etc.) if it helps with clarity.
+
+CRITICAL INSTRUCTIONS:
+1. KEEP ANSWERS EXTREMELY SHORT (1-3 sentences maximum).
+2. ONLY answer questions related to Jeevan Adhithya M, his skills, projects, or how to contact him.
+3. If the user asks a general question (e.g., math, history, general coding help, etc.), politely decline and say you are only here to answer questions about Jeevan Adhithya M.
+4. Response Tone: Professional, friendly, direct. Always highlight Jeevan's technical expertise.
 `;
 
 interface Message {
@@ -120,7 +124,7 @@ const Chatbot = () => {
               "Authorization": `Bearer ${openRouterKey}`,
               "Content-Type": "application/json",
               "HTTP-Referer": "https://Jeeva9942.github.io/jeevanadhithya-portfolio/",
-              "X-Title": "Jeevan Adhithya Portfolio"
+              "X-Title": "Jeevan Adhithya M Portfolio"
             },
             body: JSON.stringify({
               model: model,

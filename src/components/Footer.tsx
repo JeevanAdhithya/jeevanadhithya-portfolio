@@ -40,7 +40,7 @@ const Footer = () => {
                 <span className="text-white font-black text-sm">JA</span>
               </div>
               <span className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-                Jeevan <span className="text-blue-600">Adhithya</span>
+                Jeevan <span className="text-blue-600">Adhithya</span> <span className="text-slate-900 dark:text-white">M</span>
               </span>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-md">
@@ -120,7 +120,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-100 dark:border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-slate-500 dark:text-slate-500 text-sm font-medium">
-            © {currentYear} Crafted with <Heart className="w-3 h-3 text-red-500 inline mx-1 fill-red-500 animate-pulse" /> by <span className="text-slate-900 dark:text-white font-bold">Jeevan Adhithya</span>
+            © {currentYear} Crafted with <Heart className="w-3 h-3 text-red-500 inline mx-1 fill-red-500 animate-pulse" /> by <span className="text-slate-900 dark:text-white font-bold">Jeevan Adhithya M</span>
           </p>
           <div className="flex space-x-8 text-xs font-bold text-slate-400 uppercase tracking-widest">
             <a href="#" className="hover:text-blue-600 transition-colors">Privacy</a>

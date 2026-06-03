@@ -32,8 +32,8 @@ const About = () => {
   return (
     <section id="about" className="py-20 md:py-24 bg-slate-50 dark:bg-transparent relative overflow-hidden font-['Poppins'] transition-colors duration-500">
       {/* Decorative background gradients */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-100/20 dark:bg-purple-900/10 rounded-full blur-[100px] -z-10 -translate-x-1/2 translate-y-1/2" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-100/20 dark:bg-purple-900/10 rounded-full blur-3xl -z-10 -translate-x-1/2 translate-y-1/2" />
 
       <div className="container mx-auto px-6 max-w-7xl">
         <motion.div 
@@ -59,7 +59,7 @@ const About = () => {
                     className="space-y-3"
                   >
                     <p className="text-blue-400 font-bold">interface <span className="text-white">Professional</span> {'{'}</p>
-                    <p className="pl-4">name: <span className="text-emerald-400">"Jeevan Adhithya"</span>;</p>
+                    <p className="pl-4">name: <span className="text-emerald-400">"Jeevan Adhithya M"</span>;</p>
                     <p className="pl-4">mission: <span className="text-emerald-400">"Building AI Futures"</span>;</p>
                     <p className="pl-4">focus: <span className="text-emerald-400">"Web Architecture"</span>;</p>
                     <p className="text-blue-400 font-bold">{'}'}</p>
@@ -104,7 +104,7 @@ const About = () => {
 
             <div className="space-y-6 text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed font-medium">
               <p>
-                I'm <span className="text-slate-950 dark:text-white font-black underline decoration-blue-500/20 decoration-2 underline-offset-4">Jeevan Adhithya</span>, a MERN Stack developer dedicated to exploring the boundaries of technology in Coimbatore.
+                I'm <span className="text-slate-950 dark:text-white font-black underline decoration-blue-500/20 decoration-2 underline-offset-4">Jeevan Adhithya M</span>, a MERN Stack developer dedicated to exploring the boundaries of technology in Coimbatore.
               </p>
               <p>
                 I specialize in building complex, high-performance web systems where <span className="text-slate-950 dark:text-white font-black">Design meets Data</span>. I focus on creating experiences that aren't just usable—they're <span className="text-blue-600 dark:text-blue-400 font-black italic">impactful</span>.

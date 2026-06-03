@@ -66,8 +66,8 @@ const Skills = () => {
     <section id="skills" className="py-24 bg-white dark:bg-transparent relative overflow-hidden font-['Poppins'] transition-colors duration-500">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.03] dark:opacity-[0.05]">
-        <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-blue-600 rounded-full blur-[140px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-600 rounded-full blur-[140px]" />
+        <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-blue-600 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-600 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">

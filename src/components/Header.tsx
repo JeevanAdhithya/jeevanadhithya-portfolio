@@ -78,7 +78,7 @@ const Header = () => {
               />
             </div>
             <span className={`text-lg sm:text-xl font-black tracking-tighter ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
-              Jeevan <span className={`hidden xs:inline ${theme === 'dark' ? 'gradient-text' : 'gradient-text-light'}`}>Adhithya</span>
+              Jeevan <span className={`hidden xs:inline ${theme === 'dark' ? 'gradient-text' : 'gradient-text-light'}`}>Adhithya</span> <span className={theme === 'dark' ? 'text-white' : 'text-slate-900'}>M</span>
             </span>
           </motion.div>
 

@@ -64,8 +64,8 @@ const Hero = () => {
       </div>
 
       {/* Floating Blobs (Premium Look) */}
-      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px] animate-pulse parallax-item" />
-      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-[100px] animate-pulse parallax-item" />
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse parallax-item" />
+      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse parallax-item" />
       
       {init && (
         <Particles
@@ -233,7 +233,7 @@ const Hero = () => {
               <div className="w-full h-full rounded-[3.5rem] overflow-hidden shadow-2xl relative">
                 <img
                   src={heroImage}
-                  alt="Jeevan Adhithya"
+                  alt="Jeevan Adhithya M"
                   className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-110 transition-transform duration-[2000ms]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent" />
@@ -249,10 +249,10 @@ const Hero = () => {
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center text-white font-black text-base shadow-lg border-2 border-white">
                   JA
                 </div>
-                <p className="text-sm font-black text-slate-900">Jeevan Adhithya</p>
+                <p className="text-sm font-black text-slate-900">Jeevan Adhithya M</p>
               </motion.div>
 
-              <div className="absolute -inset-10 bg-blue-600/5 blur-[80px] -z-10 rounded-full animate-pulse" />
+              <div className="absolute -inset-10 bg-blue-600/5 blur-3xl -z-10 rounded-full animate-pulse" />
             </div>
           </motion.div>
 

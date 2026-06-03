@@ -20,22 +20,31 @@ gsap.registerPlugin(ScrollTrigger);
 const Index = () => {
   const { theme } = useTheme();
   const mainRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const cursorGlowRef = useRef<HTMLDivElement>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > window.innerHeight / 2);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowScrollTop(window.scrollY > window.innerHeight / 2);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      if (cursorGlowRef.current) {
+        cursorGlowRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(59, 130, 246, 0.05), transparent 80%)`;
+      }
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
@@ -49,10 +58,8 @@ const Index = () => {
     <div ref={mainRef} className={`min-h-screen transition-all duration-1000 ${theme === 'dark' ? 'dark-bg' : 'light-bg'} selection:bg-blue-500/30 overflow-hidden relative`}>
       {/* Premium Cursor Follower Spotlight Background Glow */}
       <div 
+        ref={cursorGlowRef}
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-60 dark:opacity-40"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.05), transparent 80%)`
-        }}
       />
       <Header />
       <Hero />

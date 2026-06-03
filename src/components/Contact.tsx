@@ -141,7 +141,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 bg-white dark:bg-transparent relative overflow-hidden font-['Poppins'] transition-colors duration-500">
       {/* Decorative Blur */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-[120px] -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-3xl -z-10" />
 
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -259,7 +259,7 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Jeevan Adhithya"
+                      placeholder="Jeevan Adhithya M"
                       required
                       className="h-14 px-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border-none shadow-inner focus:ring-4 focus:ring-blue-500/10 transition-all font-bold text-slate-900 dark:text-white"
                     />
