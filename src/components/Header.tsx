@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Menu, X, Github, Linkedin, Mail, Sun, Moon, ArrowRight, Zap, Home, User, Code2, Briefcase, Send } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail, Sun, Moon, ArrowRight, Zap, Home, User, Code2, Briefcase, Send, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -104,7 +104,7 @@ const Header = () => {
           </nav>
 
           {/* Premium Theme Toggle & Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -135,7 +135,23 @@ const Header = () => {
                  animate={{ scale: [1, 1.4, 1] }}
                  transition={{ duration: 3, repeat: Infinity }}
                />
-            </motion.button>
+             </motion.button>
+
+            {/* Resume Download Button */}
+            <Button
+              variant="outline"
+              asChild
+              className={`hidden sm:flex h-12 px-5 rounded-2xl font-black text-xs uppercase tracking-widest border transition-all ${
+                theme === 'dark' 
+                  ? 'border-white/20 hover:bg-white/10 text-white bg-transparent' 
+                  : 'border-slate-200 hover:bg-slate-50 text-slate-900 bg-white'
+              }`}
+            >
+              <a href="/resume" target="_blank" rel="noopener noreferrer">
+                Resume
+                <Download className="ml-2 w-3.5 h-3.5" />
+              </a>
+            </Button>
 
             <Button
               onClick={() => scrollToSection('#contact')}
@@ -185,7 +201,7 @@ const Header = () => {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className={`flex items-center space-x-4 p-4 rounded-3xl transition-all group ${
+                    className={`flex items-center space-x-4 p-3 rounded-3xl transition-all group ${
                       theme === 'dark' 
                         ? 'hover:bg-white/10 text-white' 
                         : 'hover:bg-blue-50 text-slate-900'
@@ -201,10 +217,39 @@ const Header = () => {
                   </button>
                 ))}
                 
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
+                <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-3">
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      variant="outline"
+                      asChild
+                      className={`h-12 rounded-xl font-black text-xs uppercase tracking-widest border transition-all ${
+                        theme === 'dark' 
+                          ? 'border-white/20 bg-white/5 text-white' 
+                          : 'border-slate-200 bg-white text-slate-900'
+                      }`}
+                    >
+                      <a href="/resume">
+                        View Resume
+                      </a>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      asChild
+                      className={`h-12 rounded-xl font-black text-xs uppercase tracking-widest border transition-all ${
+                        theme === 'dark' 
+                          ? 'border-white/20 bg-white/5 text-white' 
+                          : 'border-slate-200 bg-white text-slate-900'
+                      }`}
+                    >
+                      <a href="/resume?print=true" target="_blank" rel="noopener noreferrer">
+                        Download
+                        <Download className="ml-1.5 w-3.5 h-3.5" />
+                      </a>
+                    </Button>
+                  </div>
                   <Button
                     onClick={() => scrollToSection('#contact')}
-                    className={`w-full h-14 rounded-2xl font-black text-xs uppercase tracking-widest ${
+                    className={`w-full h-12 rounded-xl font-black text-xs uppercase tracking-widest ${
                       theme === 'dark' ? 'bg-white text-slate-900' : 'bg-blue-600 text-white shadow-lg'
                     }`}
                   >

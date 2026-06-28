@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://Jeeva9942.github.io/jeevanadhithya-portfolio/sitemap.xml

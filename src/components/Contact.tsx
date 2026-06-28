@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Mail, Phone, MapPin, Github, Linkedin, CheckCircle2, MessageCircle, Sparkles, SendHorizontal } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Github, Linkedin, CheckCircle2, MessageCircle, Sparkles, SendHorizontal, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -139,74 +139,83 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-white dark:bg-transparent relative overflow-hidden font-['Poppins'] transition-colors duration-500">
+    <section id="contact" className="py-20 bg-white dark:bg-transparent relative overflow-hidden font-['Poppins'] transition-colors duration-500">
       {/* Decorative Blur */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-3xl -z-10" />
 
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Info */}
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-6 space-y-10"
+            className="lg:col-span-6 space-y-8"
           >
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 shadow-sm">
-                <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                 <span className="text-[10px] font-black text-blue-700 dark:text-blue-300 tracking-widest uppercase">Get In Touch</span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.2] flex items-center">
-                <MessageCircle className="w-10 h-10 md:w-12 md:h-12 mr-3 md:mr-4 text-rose-500 dark:text-rose-400 flex-shrink-0" />
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white leading-tight flex items-center">
+                <MessageCircle className="w-8 h-8 md:w-10 md:h-10 mr-3 text-rose-500 dark:text-rose-400 flex-shrink-0" />
                 <span>Let's <span className="text-blue-600 dark:text-blue-500">Accelerate</span> Your Vision.</span>
               </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-xl">
                 I'm currently open to <span className="text-slate-900 dark:text-white font-black">MERN Stack</span> and <span className="text-slate-900 dark:text-white font-black">AI</span> roles. Have a project in mind? reach out through any of these channels.
               </p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {contactInfo.map((info, idx) => (
                 <motion.a
                   key={idx}
                   href={info.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ x: 10, scale: 1.02 }}
-                  className="flex items-center space-x-4 sm:space-x-6 p-4 rounded-[2rem] hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-all duration-300 group ring-1 ring-transparent hover:ring-slate-100 dark:hover:ring-slate-800"
+                  whileHover={{ x: 6, scale: 1.01 }}
+                  className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-all duration-300 group ring-1 ring-transparent hover:ring-slate-100 dark:hover:ring-slate-800"
                 >
-                  <div className={`w-12 h-12 sm:w-14 sm:h-14 ${info.color} rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-xl transition-all duration-300 flex-shrink-0`}>
-                    <info.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <div className={`w-10 h-10 ${info.color} rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300 flex-shrink-0`}>
+                    <info.icon className="w-4.5 h-4.5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">{info.label}</p>
-                    <p className="text-base sm:text-lg font-black text-slate-900 dark:text-white transition-colors break-all sm:break-normal">{info.value}</p>
+                    <p className="text-[8px] sm:text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">{info.label}</p>
+                    <p className="text-sm sm:text-base font-black text-slate-900 dark:text-white transition-colors break-all">{info.value}</p>
                   </div>
                 </motion.a>
               ))}
             </div>
 
-            <div className="pt-8 border-t border-slate-100 dark:border-slate-800">
+            <div className="pt-6 border-t border-slate-100 dark:border-slate-800 grid sm:grid-cols-2 gap-4">
               <Button
                 onClick={openWhatsApp}
-                className="w-full h-16 rounded-[2rem] bg-green-500 hover:bg-green-600 text-white shadow-xl shadow-green-500/20 font-black text-lg group"
+                className="h-12 rounded-xl bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/10 font-black text-xs uppercase tracking-wider group"
               >
-                <MessageCircle className="mr-3 w-6 h-6 group-hover:rotate-12 transition-transform" />
-                Chat on WhatsApp
+                <MessageCircle className="mr-2 w-4.5 h-4.5 group-hover:rotate-12 transition-transform animate-pulse" />
+                WhatsApp Chat
+              </Button>
+              <Button
+                asChild
+                className="h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/10 font-black text-xs uppercase tracking-wider group"
+              >
+                <a href="/resume">
+                  <Download className="mr-2 w-4.5 h-4.5 group-hover:translate-y-0.5 transition-transform" />
+                  View Resume
+                </a>
               </Button>
             </div>
           </motion.div>
 
           {/* Right Column: Form */}
           <motion.div 
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="lg:col-span-6"
           >
-            <Card className="p-6 md:p-12 bg-white dark:bg-slate-900/50 backdrop-blur-3xl border border-slate-100 dark:border-slate-800 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl relative overflow-hidden group ring-1 ring-slate-100 dark:ring-slate-800">
+            <Card className="p-6 md:p-8 bg-white dark:bg-slate-900/50 backdrop-blur-3xl border border-slate-100 dark:border-slate-800 rounded-[2rem] shadow-xl relative overflow-hidden group ring-1 ring-slate-100 dark:ring-slate-800">
               {/* Form Success Animation */}
               <AnimatePresence>
                 {submitted && (
@@ -214,7 +223,7 @@ const Contact = () => {
                     initial={{ opacity: 0, scale: 0.8, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.8, y: 20 }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl z-20 flex flex-col items-center justify-center text-center rounded-2xl border border-slate-100 dark:border-slate-800 shadow-2xl overflow-hidden"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl z-20 flex flex-col items-center justify-center text-center rounded-xl border border-slate-100 dark:border-slate-800 shadow-2xl overflow-hidden p-6"
                     style={{ aspectRatio: "16/9" }}
                   >
                     {/* Confetti/Sprinkles Animation */}
@@ -231,41 +240,35 @@ const Contact = () => {
                          transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.2 }}
                          className="absolute top-0 left-[50%] w-1 h-2 rounded-full bg-blue-400"
                        />
-                       <motion.div
-                         initial={{ y: -50, opacity: 0, x: 0 }}
-                         animate={{ y: 150, opacity: [0, 1, 0], x: -10 }}
-                         transition={{ duration: 1.8, repeat: Infinity, ease: "linear", delay: 0.5 }}
-                         className="absolute top-0 left-[80%] w-1.5 h-1.5 rounded-full bg-yellow-400"
-                       />
                     </div>
                     <motion.div 
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", damping: 10, stiffness: 100, delay: 0.1 }}
-                      className="text-3xl mb-1 relative z-10"
+                      className="text-2xl mb-1 relative z-10"
                     >
                       💐
                     </motion.div>
-                    <h3 className="text-sm font-black text-slate-900 dark:text-white relative z-10">Message Sent!</h3>
+                    <h3 className="text-xs font-black text-slate-900 dark:text-white relative z-10">Message Sent!</h3>
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2">Your Full Name</label>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest px-1">Your Full Name</label>
                     <Input
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Jeevan Adhithya M"
                       required
-                      className="h-14 px-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border-none shadow-inner focus:ring-4 focus:ring-blue-500/10 transition-all font-bold text-slate-900 dark:text-white"
+                      className="h-12 px-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border-none shadow-inner focus:ring-4 focus:ring-blue-500/5 transition-all font-bold text-slate-900 dark:text-white"
                     />
                   </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2">Email Address</label>
+                  <div className="space-y-2">
+                    <label className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest px-1">Email Address</label>
                     <Input
                       type="email"
                       name="email"
@@ -273,37 +276,37 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="jeevan@example.com"
                       required
-                      className="h-14 px-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border-none shadow-inner focus:ring-4 focus:ring-blue-500/10 transition-all font-bold text-slate-900 dark:text-white"
+                      className="h-12 px-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border-none shadow-inner focus:ring-4 focus:ring-blue-500/5 transition-all font-bold text-slate-900 dark:text-white"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2">Project Vision</label>
+                <div className="space-y-2">
+                  <label className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest px-1">Project Vision</label>
                   <Textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Briefly describe your requirements..."
                     required
-                    rows={6}
-                    className="p-6 rounded-[2rem] bg-slate-50 dark:bg-slate-800/50 border-none shadow-inner focus:ring-4 focus:ring-blue-500/10 transition-all font-bold text-slate-900 dark:text-white resize-none"
+                    rows={4}
+                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border-none shadow-inner focus:ring-4 focus:ring-blue-500/5 transition-all font-bold text-slate-900 dark:text-white resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-16 rounded-[2rem] bg-slate-950 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 text-white shadow-2xl transition-all duration-300 transform active:scale-95 text-lg font-black group"
+                  className="w-full h-12 rounded-xl bg-slate-950 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 text-white shadow-lg transition-all duration-300 transform active:scale-95 text-xs font-black group"
                 >
                   {isSubmitting ? (
                     <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1 }}>
-                      <Sparkles className="w-6 h-6" />
+                      <Sparkles className="w-5 h-5" />
                     </motion.div>
                   ) : (
                     <>
                       Send Inquiry
-                      <SendHorizontal className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                      <SendHorizontal className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </Button>

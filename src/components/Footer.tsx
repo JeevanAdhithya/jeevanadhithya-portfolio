@@ -44,9 +44,9 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-md">
-              A dedicated <span className="text-slate-900 dark:text-white font-bold">MERN Stack Developer</span> and 
-              <span className="text-blue-600 font-bold"> AI Enthusiast</span> from Coimbatore. I build 
-              modern web solutions that bring ideas to life.
+              A dedicated <span className="text-slate-900 dark:text-white font-bold">Full-Stack Engineer</span> and 
+              <span className="text-blue-600 font-bold"> AI Integration Specialist</span> from Coimbatore. Building 
+              modern, production-grade applications that connect design, data, and machine learning.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
@@ -81,6 +81,26 @@ const Footer = () => {
                   </a>
                 </li>
               ))}
+              <li>
+                <a 
+                  href="/resume"
+                  className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 flex items-center group text-sm font-semibold"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  View Resume
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/resume?print=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 flex items-center group text-sm font-semibold"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                  Download Resume
+                </a>
+              </li>
             </ul>
           </div>
 

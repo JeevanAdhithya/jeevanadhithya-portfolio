@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, MessageCircle, Zap, Sparkles, ArrowUpRight, Trophy, Code2 } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, MessageCircle, Zap, Sparkles, ArrowUpRight, Trophy, Code2, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
 import gsap from 'gsap';
@@ -24,30 +24,16 @@ const Hero = () => {
     }).then(() => {
       setInit(true);
     });
-
-    // Interactive GSAP mouse movement for parallax
-    if (heroRef.current) {
-      const handleMouseMove = (e: MouseEvent) => {
-        const { clientX, clientY } = e;
-        const xPos = (clientX / window.innerWidth - 0.5) * 20;
-        const yPos = (clientY / window.innerHeight - 0.5) * 20;
-
-        gsap.to('.parallax-item', {
-          x: xPos,
-          y: yPos,
-          duration: 1,
-          ease: 'power2.out',
-          stagger: 0.05
-        });
-      };
-
-      window.addEventListener('mousemove', handleMouseMove);
-      return () => window.removeEventListener('mousemove', handleMouseMove);
-    }
   }, []);
 
   const scrollToSection = (id: string) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.querySelector(id);
+    if (element) {
+      window.scrollTo({
+        top: element.getBoundingClientRect().top + window.pageYOffset - 80,
+        behavior: 'smooth'
+      });
+    }
   };
 
   if (!mounted) return null;
@@ -56,7 +42,7 @@ const Hero = () => {
     <section 
       id="home" 
       ref={heroRef} 
-      className={`min-h-screen flex items-center justify-center relative overflow-hidden transition-all duration-1000 ${theme === 'dark' ? 'dark-bg' : 'light-bg'}`}
+      className="min-h-screen flex items-center justify-center relative overflow-hidden transition-all duration-1000"
     >
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none">
@@ -64,8 +50,8 @@ const Hero = () => {
       </div>
 
       {/* Floating Blobs (Premium Look) */}
-      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse parallax-item" />
-      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse parallax-item" />
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500/20 dark:bg-blue-500/30 rounded-full blur-3xl animate-pulse parallax-item" />
+      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-500/20 dark:bg-purple-500/30 rounded-full blur-3xl animate-pulse parallax-item" />
       
       {init && (
         <Particles
@@ -89,19 +75,22 @@ const Hero = () => {
       )}
 
       <div className="container mx-auto px-6 relative z-10 max-w-7xl pt-24 sm:pt-32 pb-16 sm:pb-24">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Content Left */}
-          <div className="space-y-6 sm:space-y-8 lg:pl-4 relative text-left parallax-item">
+          {/* NOTE: Text column is order-1 so it appears on the left */}
+
+
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8 lg:pr-6 relative text-left order-1 lg:order-1">
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, type: "spring" }}
-              className="inline-flex items-center space-x-2 px-6 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 backdrop-blur-md relative overflow-hidden"
+              className="inline-flex items-center space-x-2 px-5 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 backdrop-blur-md relative overflow-hidden"
             >
               <Zap className="w-3 h-3 text-blue-500 fill-blue-500" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500">
-                Crafting Elite AI Solutions
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500">
+                Crafting Elite Web & AI Architectures
               </span>
               <motion.div 
                 className="absolute left-0 bottom-0 h-px bg-blue-500/30"
@@ -117,7 +106,7 @@ const Hero = () => {
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}
+                  className={`text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-none ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}
                 >
                   Jeevan
                 </motion.h1>
@@ -127,9 +116,9 @@ const Hero = () => {
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none gradient-text"
+                  className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-none gradient-text"
                 >
-                  Adhithya
+                  Adhithya M
                 </motion.h1>
               </div>
             </div>
@@ -138,9 +127,9 @@ const Hero = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className={`text-lg sm:text-lg max-w-lg leading-relaxed font-semibold ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}
+              className={`text-base sm:text-lg max-w-xl leading-relaxed font-semibold ${theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}
             >
-              Transforming complex visions into <span className={theme === 'dark' ? 'text-white' : 'text-blue-600 font-bold'}>state-of-the-art</span> digital ecosystems. A <span className="text-blue-500 font-black">MERN Stack Developer</span> bridging the gap between advanced AI and seamless human experience.
+              Engineering <span className={theme === 'dark' ? 'text-white underline decoration-blue-500 decoration-2' : 'text-blue-600 font-bold underline decoration-blue-500 decoration-2'}>scalable web architectures</span> and intelligent <span className="text-purple-500 font-black">AI integrations</span>. A Full-Stack Engineer focused on building robust, production-grade solutions.
             </motion.p>
 
             {/* Micro Stats */}
@@ -149,16 +138,16 @@ const Hero = () => {
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
                transition={{ duration: 0.8, delay: 0.5 }}
-               className="flex items-center space-x-6 sm:space-x-12 py-4"
+               className="flex items-center space-x-6 sm:space-x-12 py-2"
             >
               {[
-                { val: '3+', label: 'Years Exp.' },
-                { val: '50+', label: 'Projects Done' },
-                { val: '100%', label: 'Success Rate' }
+                { val: '3+ Yrs', label: 'Learning & Dev' },
+                { val: '20+', label: 'Websites Developed' },
+                { val: '5+', label: 'Mobile Applications' }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col group cursor-default">
-                  <span className={`text-2xl font-black transition-transform group-hover:-translate-y-1 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{stat.val}</span>
-                  <span className="text-[10px] uppercase tracking-widest font-bold text-slate-500 group-hover:text-blue-500 transition-colors">{stat.label}</span>
+                  <span className={`text-xl sm:text-2xl font-black transition-transform group-hover:-translate-y-0.5 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{stat.val}</span>
+                  <span className="text-[9px] uppercase tracking-widest font-bold text-slate-500 group-hover:text-blue-500 transition-colors">{stat.label}</span>
                 </div>
               ))}
             </motion.div>
@@ -167,33 +156,53 @@ const Hero = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-wrap gap-5"
+              className="flex flex-wrap gap-4"
             >
               <Button
                 onClick={() => scrollToSection('#projects')}
-                className={`h-14 px-10 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl lg:w-auto w-full group overflow-hidden relative ${
+                className={`h-12 px-6 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl lg:w-auto w-full group overflow-hidden relative ${
                   theme === 'dark' ? 'bg-white text-slate-950 hover:bg-white/90' : 'bg-slate-950 text-white hover:bg-slate-800'
                 }`}
               >
                 <span className="relative z-10 flex items-center">
-                  View Architectures
+                  Explore Case Studies
                   <Code2 className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
                 </span>
-                <motion.div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <motion.div className="absolute inset-0 bg-blue-50/10 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Button>
+              
               <Button
                 variant="outline"
-                onClick={() => scrollToSection('#contact')}
-                className={`h-14 px-10 rounded-xl font-black text-xs uppercase tracking-widest border-2 transition-all lg:w-auto w-full group relative overflow-hidden ${
+                asChild
+                className={`h-12 px-6 rounded-xl font-black text-xs uppercase tracking-widest border-2 transition-all lg:w-auto w-full group relative overflow-hidden bg-transparent ${
                   theme === 'dark' 
-                    ? 'border-white/20 hover:bg-white/5 text-white' 
-                    : 'border-slate-200 hover:bg-slate-50 text-slate-900'
+                    ? 'border-white/20 hover:bg-white/5 text-white hover:border-white' 
+                    : 'border-slate-200 hover:bg-slate-50 text-slate-900 hover:border-slate-400'
                 }`}
               >
-                <span className="relative z-10 flex items-center">
-                  Initiate Chat
-                  <MessageCircle className="ml-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-                </span>
+                <a href="/resume">
+                  <span className="relative z-10 flex items-center">
+                    View Resume
+                    <ArrowUpRight className="ml-1.5 h-4 w-4" />
+                  </span>
+                </a>
+              </Button>
+
+              <Button
+                variant="outline"
+                asChild
+                className={`h-12 px-6 rounded-xl font-black text-xs uppercase tracking-widest border-2 transition-all lg:w-auto w-full group relative overflow-hidden bg-transparent ${
+                  theme === 'dark' 
+                    ? 'border-white/10 hover:bg-white/5 text-white/80 hover:text-white' 
+                    : 'border-slate-200 hover:bg-slate-50 text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <a href="/resume?print=true" target="_blank" rel="noopener noreferrer">
+                  <span className="relative z-10 flex items-center">
+                    Download Resume
+                    <Download className="ml-1.5 h-3.5 w-3.5 group-hover:translate-y-0.5 transition-transform" />
+                  </span>
+                </a>
               </Button>
             </motion.div>
 
@@ -201,7 +210,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1 }}
-              className="flex gap-10 pt-4"
+              className="flex gap-8 pt-2"
             >
               {[
                 { icon: Github, href: "https://github.com/JeevanAdhithya" },
@@ -212,31 +221,31 @@ const Hero = () => {
                   href={social.href} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className={`transition-all hover:scale-125 ${theme === 'dark' ? 'text-slate-500 hover:text-white' : 'text-slate-400 hover:text-blue-600'}`}
+                  className={`transition-all hover:scale-110 ${theme === 'dark' ? 'text-slate-500 hover:text-white' : 'text-slate-400 hover:text-blue-600'}`}
                 >
-                  <social.icon className="w-7 h-7" />
+                  <social.icon className="w-6 h-6" />
                 </a>
               ))}
             </motion.div>
           </div>
 
-          {/* Hero Image Right */}
+          {/* Hero Image Right (9:16 Vertical Card) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, x: 50 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex items-center justify-center lg:justify-end parallax-item"
+            className="lg:col-span-5 flex items-center justify-center lg:justify-end order-2 lg:order-2"
           >
-            <div className={`relative w-full max-w-[440px] aspect-[4/5] rounded-[4rem] p-4 backdrop-blur-2xl shadow-2xl transition-all duration-700 group ${
+            <div className={`relative w-full max-w-[420px] aspect-[3/4] rounded-[3.5rem] p-4 backdrop-blur-2xl shadow-2xl transition-all duration-700 group ${
               theme === 'dark' ? 'bg-white/5 border border-white/10' : 'bg-white/40 border border-slate-200'
             }`}>
-              <div className="w-full h-full rounded-[3.5rem] overflow-hidden shadow-2xl relative">
+              <div className="w-full h-full rounded-[2.8rem] overflow-hidden shadow-2xl relative">
                 <img
                   src={heroImage}
                   alt="Jeevan Adhithya M"
-                  className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-110 transition-transform duration-[2000ms]"
+                  className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-105 transition-transform duration-[2000ms]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
               </div>
 
               {/* Floating Badge */}
@@ -244,12 +253,12 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
-                className={`absolute -top-6 -right-6 px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border bg-white border-slate-100 hover:scale-105 transition-transform cursor-pointer`}
+                className="absolute -top-4 -right-4 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 border bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 hover:scale-105 transition-transform cursor-pointer"
               >
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center text-white font-black text-base shadow-lg border-2 border-white">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center text-white font-black text-xs shadow-lg border-2 border-white dark:border-slate-900">
                   JA
                 </div>
-                <p className="text-sm font-black text-slate-900">Jeevan Adhithya M</p>
+                <p className="text-xs font-black text-slate-900 dark:text-white">Jeevan Adhithya M</p>
               </motion.div>
 
               <div className="absolute -inset-10 bg-blue-600/5 blur-3xl -z-10 rounded-full animate-pulse" />

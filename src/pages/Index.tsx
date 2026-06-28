@@ -7,6 +7,7 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
+import Credibility from '@/components/Credibility';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Chatbot from '@/components/Chatbot';
@@ -39,13 +40,22 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
+    let frameId: number;
     const handleMouseMove = (e: MouseEvent) => {
       if (cursorGlowRef.current) {
-        cursorGlowRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(59, 130, 246, 0.05), transparent 80%)`;
+        if (frameId) cancelAnimationFrame(frameId);
+        frameId = requestAnimationFrame(() => {
+          if (cursorGlowRef.current) {
+            cursorGlowRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(59, 130, 246, 0.05), transparent 80%)`;
+          }
+        });
       }
     };
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (frameId) cancelAnimationFrame(frameId);
+    };
   }, []);
 
   useEffect(() => {
@@ -64,9 +74,10 @@ const Index = () => {
       <Header />
       <Hero />
       <About />
-      <GithubRepos />
       <Skills />
       <Projects />
+      <GithubRepos />
+      <Credibility />
       <Contact />
       <Footer />
       <AnimatePresence>
