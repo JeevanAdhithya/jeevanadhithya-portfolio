@@ -83,20 +83,18 @@ const SkillCard = ({ category, idx, isMobile = false }: SkillCardProps) => {
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: isMobile ? 0.05 * idx : 0.08 * idx }}
       whileHover={isMobile ? {} : { y: -6 }}
-      className={`bg-slate-50 dark:bg-slate-900/50 p-6 sm:p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-blue-500/20 dark:hover:border-blue-500/20 transition-all duration-300 group ring-1 ring-slate-100 dark:ring-slate-800 cursor-default will-change-transform h-full flex flex-col justify-between ${
-        isMobile ? 'aspect-[16/10] sm:aspect-auto' : ''
-      }`}
+      className="bg-slate-50 dark:bg-slate-900/50 p-4 sm:p-7 rounded-2xl sm:rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-blue-500/20 dark:hover:border-blue-500/20 transition-all duration-300 group ring-1 ring-slate-100 dark:ring-slate-800 cursor-default will-change-transform h-full flex flex-col justify-between"
     >
       <div>
-        <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-5 sm:mb-6 shadow-md group-hover:scale-105 transition-transform duration-300`}>
-          <category.icon className="w-5.5 h-5.5 sm:w-6 sm:h-6 text-white" />
+        <div className={`w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-3 sm:mb-5 shadow-md group-hover:scale-105 transition-transform duration-300`}>
+          <category.icon className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 text-white" />
         </div>
 
-        <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white mb-4 sm:mb-6 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        <h3 className="text-sm sm:text-lg font-black text-slate-900 dark:text-white mb-3 sm:mb-5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
           {category.title}
         </h3>
 
-        <div className="space-y-3 sm:space-y-4">
+        <div className="space-y-2.5 sm:space-y-3.5">
           {category.skills.map((skill) => (
             <div key={skill.name}>
               <div className="flex justify-between items-center mb-1">

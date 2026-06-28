@@ -102,13 +102,13 @@ const GithubRepos = () => {
         </div>
 
         {loading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-64 rounded-[2rem] bg-slate-50 dark:bg-slate-800 animate-pulse border border-slate-100 dark:border-slate-700/50" />
+              <div key={i} className="h-48 sm:h-64 rounded-2xl sm:rounded-[2rem] bg-slate-50 dark:bg-slate-800 animate-pulse border border-slate-100 dark:border-slate-700/50" />
             ))}
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {repos.map((repo, idx) => (
               <motion.div
                 key={repo.id}
@@ -118,35 +118,35 @@ const GithubRepos = () => {
                 transition={{ delay: idx * 0.1 }}
                 className="group relative h-full"
               >
-                <div className="absolute inset-0 bg-blue-600/5 dark:bg-blue-600/10 rounded-[2.5rem] -rotate-1 group-hover:rotate-1 transition-transform" />
-                <Card className="p-8 h-full bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800/50 rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none hover:shadow-2xl transition-all duration-300 relative overflow-hidden backdrop-blur-sm">
+                <div className="absolute inset-0 bg-blue-600/5 dark:bg-blue-600/10 rounded-2xl sm:rounded-[2.5rem] -rotate-1 group-hover:rotate-1 transition-transform" />
+                <Card className="p-4 sm:p-7 h-full bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800/50 rounded-2xl sm:rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none hover:shadow-2xl transition-all duration-300 relative overflow-hidden backdrop-blur-sm">
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-600/10 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                    <div className="flex justify-between items-start mb-3 sm:mb-5">
+                      <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-600/10 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
                         {getRepoIcon(repo.name, repo.description)}
                       </div>
-                      <div className="flex space-x-3">
-                        <div className="flex items-center space-x-1 text-slate-500 dark:text-slate-400 text-xs font-bold bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded-lg">
-                          <Star className="w-3.5 h-3.5 text-amber-500" />
+                      <div className="flex space-x-2 sm:space-x-3">
+                        <div className="flex items-center space-x-1 text-slate-500 dark:text-slate-400 text-[10px] sm:text-xs font-bold bg-slate-50 dark:bg-slate-800 px-2 py-0.5 sm:py-1 rounded-lg">
+                          <Star className="w-3 h-3 text-amber-500" />
                           <span>{repo.stargazers_count}</span>
                         </div>
-                        <div className="flex items-center space-x-1 text-slate-500 dark:text-slate-400 text-xs font-bold bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded-lg">
-                          <GitFork className="w-3.5 h-3.5 text-blue-500" />
+                        <div className="flex items-center space-x-1 text-slate-500 dark:text-slate-400 text-[10px] sm:text-xs font-bold bg-slate-50 dark:bg-slate-800 px-2 py-0.5 sm:py-1 rounded-lg">
+                          <GitFork className="w-3 h-3 text-blue-500" />
                           <span>{repo.forks_count}</span>
                         </div>
                       </div>
                     </div>
 
-                    <h3 className="text-lg md:text-xl font-black text-slate-950 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <h3 className="text-base sm:text-lg md:text-xl font-black text-slate-950 dark:text-white mb-2 sm:mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {repo.name}
                     </h3>
                     
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-8 font-medium line-clamp-2 leading-relaxed h-[2.8rem]">
+                    <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-4 sm:mb-6 font-medium line-clamp-2 leading-relaxed">
                       {repo.description || "Experimental project focusing on modern architectures and clean implementation."}
                     </p>
 
-                    <div className="mt-auto space-y-6">
-                      <div className="flex flex-wrap items-center gap-3">
+                    <div className="mt-auto space-y-3 sm:space-y-5">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                         {(() => {
                           const isMobile = ['dart', 'flutter', 'kotlin', 'swift'].includes((repo.language || '').toLowerCase()) || 
                                            (repo.name + ' ' + repo.description).toLowerCase().includes('mobile') ||
@@ -154,23 +154,23 @@ const GithubRepos = () => {
                           const platform = isMobile ? "Mobile" : "Web";
                           const PlatformIcon = isMobile ? Smartphone : Globe;
                           return (
-                            <div className="flex items-center space-x-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-full border border-slate-200 dark:border-slate-700/50">
-                              <PlatformIcon className="w-3 h-3 text-slate-600 dark:text-slate-400" />
-                              <span className="text-[9px] font-black uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            <div className="flex items-center space-x-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-slate-100 dark:bg-slate-800/50 rounded-full border border-slate-200 dark:border-slate-700/50">
+                              <PlatformIcon className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-slate-600 dark:text-slate-400" />
+                              <span className="text-[8.5px] sm:text-[9px] font-black uppercase tracking-wider text-slate-700 dark:text-slate-300">
                                 {platform}
                               </span>
                             </div>
                           );
                         })()}
                         {repo.language && (
-                          <div className="flex items-center space-x-1.5 px-3 py-1 bg-blue-50 dark:bg-blue-900/30 rounded-full border border-blue-100/50 dark:border-blue-800/50">
-                            <Zap className="w-3 h-3 text-blue-600 dark:text-blue-400" />
-                            <span className="text-[9px] font-black uppercase tracking-wider text-blue-700 dark:text-blue-300">
+                          <div className="flex items-center space-x-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-blue-50 dark:bg-blue-900/30 rounded-full border border-blue-100/50 dark:border-blue-800/50">
+                            <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-blue-600 dark:text-blue-400" />
+                            <span className="text-[8.5px] sm:text-[9px] font-black uppercase tracking-wider text-blue-700 dark:text-blue-300">
                               {repo.language}
                             </span>
                           </div>
                         )}
-                        <span className="flex items-center text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                        <span className="flex items-center text-[8.5px] sm:text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
                           <Calendar className="w-2.5 h-2.5 mr-1" />
                           {formatDate(repo.updated_at)}
                         </span>
@@ -178,10 +178,10 @@ const GithubRepos = () => {
 
                       <Button 
                         onClick={() => window.open(repo.html_url, '_blank')}
-                        className="w-full h-12 rounded-2xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 hover:bg-blue-600 dark:hover:bg-blue-500 dark:hover:text-white transition-all font-black text-xs uppercase tracking-widest"
+                        className="w-full h-10 sm:h-12 rounded-xl sm:rounded-2xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 hover:bg-blue-600 dark:hover:bg-blue-500 dark:hover:text-white transition-all font-black text-[10px] sm:text-xs uppercase tracking-widest"
                       >
                         Source Code
-                        <ExternalLink className="ml-2 w-3.5 h-3.5 opacity-60" />
+                        <ExternalLink className="ml-1.5 w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-60" />
                       </Button>
                     </div>
                   </div>

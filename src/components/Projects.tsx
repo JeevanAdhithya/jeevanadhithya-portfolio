@@ -185,7 +185,7 @@ const Projects = () => {
 
         <motion.div 
           layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
@@ -200,12 +200,12 @@ const Projects = () => {
                 whileHover={{ y: -8 }}
                 className="h-full"
               >
-                <Card className="group relative h-full overflow-hidden border border-slate-100 dark:border-slate-800/50 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm hover:shadow-3xl hover:border-blue-500/20 dark:hover:border-blue-400/20 transition-all duration-500 flex flex-col ring-1 ring-slate-100 dark:ring-slate-800 cursor-default">
+                <Card className="group relative h-full overflow-hidden border border-slate-100 dark:border-slate-800/50 bg-white dark:bg-slate-900 rounded-2xl sm:rounded-[2.5rem] shadow-sm hover:shadow-3xl hover:border-blue-500/20 dark:hover:border-blue-400/20 transition-all duration-500 flex flex-col ring-1 ring-slate-100 dark:ring-slate-800 cursor-default">
                   {/* Premium Glowing Card Background */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/0 via-indigo-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:via-indigo-500/5 group-hover:to-purple-500/5 transition-all duration-700 pointer-events-none rounded-[2.5rem]" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/0 via-indigo-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:via-indigo-500/5 group-hover:to-purple-500/5 transition-all duration-700 pointer-events-none rounded-2xl sm:rounded-[2.5rem]" />
                   
                   {/* Image */}
-                  <div className="relative w-full aspect-video overflow-hidden m-3 mx-auto rounded-[1.5rem] bg-slate-100 dark:bg-slate-800" style={{ width: 'calc(100% - 1.5rem)' }}>
+                  <div className="relative w-full aspect-video overflow-hidden m-2.5 sm:m-3 mx-auto rounded-xl sm:rounded-[1.5rem] bg-slate-100 dark:bg-slate-800" style={{ width: 'calc(100% - 1.25rem)' }}>
                     <motion.img
                       src={project.image}
                       alt={`Screenshot of ${project.title} project`}
@@ -216,38 +216,38 @@ const Projects = () => {
                     />
                     
                     {/* Glowing Tech Tag */}
-                    <div className="absolute top-4 right-4 py-1.5 px-4 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-white/20 dark:border-slate-700/50 text-[10px] font-black uppercase tracking-widest text-slate-900 dark:text-white shadow-xl group-hover:bg-blue-600 group-hover:text-white transition-all cursor-default">
+                    <div className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 py-1 px-3 sm:py-1.5 sm:px-4 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-white/20 dark:border-slate-700/50 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-900 dark:text-white shadow-xl group-hover:bg-blue-600 group-hover:text-white transition-all cursor-default">
                       {project.technologies[0]}
                     </div>
                   </div>
 
                   {/* Content Area */}
-                  <div className="p-5 flex flex-col flex-1">
-                    <div className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 mb-3 bg-blue-50/50 dark:bg-blue-900/20 w-fit px-3 py-1 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                  <div className="p-4 sm:p-5 flex flex-col flex-1">
+                    <div className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 mb-2 sm:mb-3 bg-blue-50/50 dark:bg-blue-900/20 w-fit px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-lg sm:rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                       {project.icon}
-                      <span className="text-[10px] font-black uppercase tracking-widest">{project.category} Suite</span>
+                      <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest">{project.category} Suite</span>
                     </div>
                     
-                    <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2 group-hover:translate-x-1 transition-transform duration-300">
+                    <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white mb-1.5 sm:mb-2 group-hover:translate-x-1 transition-transform duration-300">
                       {project.title}
                     </h3>
-                    <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-4 flex-1 font-medium group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">
+                    <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-3 sm:mb-4 flex-1 font-medium group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">
                       {project.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-1.5 mb-4">
+                    <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3 sm:mb-4">
                       {project.technologies.map((tech) => (
-                        <Badge key={tech} className="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-none px-3 py-1 font-bold text-[9px] uppercase tracking-wider hover:bg-blue-600 hover:text-white transition-colors cursor-default">
+                        <Badge key={tech} className="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-none px-2.5 py-0.5 sm:px-3 sm:py-1 font-bold text-[8.5px] sm:text-[9px] uppercase tracking-wider hover:bg-blue-600 hover:text-white transition-colors cursor-default">
                           {tech}
                         </Badge>
                       ))}
                     </div>
 
                     {/* Recruiter-friendly interactive case study integration */}
-                    <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                    <div className="mt-auto pt-3 sm:pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2 sm:gap-3">
                       <Dialog>
                         <DialogTrigger asChild>
-                          <Button variant="outline" size="sm" className="rounded-xl border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 font-black text-[10px] uppercase tracking-wider flex-1 py-5 shadow-sm">
+                          <Button variant="outline" size="sm" className="rounded-xl border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 font-black text-[9px] sm:text-[10px] uppercase tracking-wider flex-1 py-3 sm:py-5 shadow-sm">
                             Case Study
                           </Button>
                         </DialogTrigger>
